@@ -60,7 +60,7 @@
             background-color: var(--udc-navy);
             box-shadow: 4px 0 20px rgba(0,0,0,0.35);
             z-index: 2000;
-            transform: translateX(-255px); /* Keeps indicator tab visible on left edge */
+            transform: translateX(-255px);
             transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1);
             border-right: 4px solid var(--udc-golden);
             display: flex;
@@ -68,12 +68,10 @@
             padding: 2rem 1.25rem;
         }
 
-        /* Slide out fully on hover */
         .sidebar-nav:hover {
             transform: translateX(0);
         }
 
-        /* Visible edge tab indicator */
         .sidebar-tab {
             position: absolute;
             right: -38px;
@@ -136,7 +134,7 @@
             font-weight: 700;
         }
 
-        /* LARGE CLEAN TOP HEADER (Scrolls naturally) */
+        /* HEADER & DYNAMIC LOGO SWAPPING */
         header {
             background: linear-gradient(135deg, var(--udc-navy) 0%, #030c22 100%);
             color: var(--udc-white);
@@ -153,12 +151,19 @@
             margin-bottom: 2rem;
         }
 
-        /* Prominent Header Logo */
         .main-brand-logo {
-            height: 85px;
-            width: auto;
             object-fit: contain;
             filter: drop-shadow(0 4px 10px rgba(0,0,0,0.4));
+        }
+
+        .desktop-logo {
+            display: block;
+            height: 85px;
+            width: auto;
+        }
+
+        .mobile-logo {
+            display: none;
         }
 
         .badge-pill {
@@ -294,25 +299,29 @@
             color: #334155;
         }
 
-        /* Tables */
+        /* TABLE DESKTOP STYLING */
+        .table-responsive {
+            width: 100%;
+            margin: 1.5rem 0;
+        }
+
         .custom-table {
             width: 100%;
             border-collapse: collapse;
-            margin: 1.5rem 0;
-            font-size: 0.95rem;
+            font-size: 0.925rem;
         }
 
         .custom-table th {
             background-color: var(--udc-navy);
             color: var(--udc-white);
             text-align: left;
-            padding: 0.9rem 1rem;
+            padding: 0.85rem 0.75rem;
             font-weight: 700;
             letter-spacing: 0.5px;
         }
 
         .custom-table td {
-            padding: 0.9rem 1rem;
+            padding: 0.85rem 0.75rem;
             border-bottom: 1px solid var(--udc-border);
             white-space: nowrap;
         }
@@ -366,7 +375,7 @@
             margin-bottom: 0;
         }
 
-        /* TESTIMONIAL CARDS WITH PROMINENT SINGLE/DUAL PHOTO AVATARS */
+        /* TESTIMONIAL CARDS */
         .quotes-grid {
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(340px, 1fr));
@@ -402,18 +411,16 @@
             border-top: 1px solid var(--udc-sand);
         }
 
-        /* Flex container for single or dual photo avatars */
         .author-avatars-group {
             display: flex;
             gap: 0.85rem;
             align-items: center;
         }
 
-        /* Large, sharp photo avatar frame */
         .cpo-avatar {
             width: 85px;
             height: 85px;
-            border-radius: 8px; /* Modern rounded badge frame */
+            border-radius: 8px;
             object-fit: cover;
             border: 3px solid var(--udc-golden);
             box-shadow: 0 4px 8px rgba(0,0,0,0.12);
@@ -483,9 +490,9 @@
             color: var(--udc-mist);
             margin-bottom: 0.5rem;
         }
-        /* MOBILE RESPONSIVE OPTIMIZATIONS */
+
+        /* MOBILE RESPONSIVE RULES (IF SCREEN < 768px) */
         @media (max-width: 768px) {
-            /* Prevent whole-page horizontal side-scroll wobble */
             html, body {
                 overflow-x: hidden;
             }
@@ -494,14 +501,21 @@
                 padding: 1.5rem 1rem;
             }
 
-            /* Compact Mobile Header */
+            /* 1. Header & Vertical Logo Swap */
             header {
                 padding: 1.75rem 1rem;
+                text-align: center;
             }
 
-            .main-brand-logo {
-                height: 50px; /* Scaled down logo for mobile screens */
-                margin-bottom: 1rem;
+            .desktop-logo {
+                display: none !important;
+            }
+
+            .mobile-logo {
+                display: block !important;
+                height: 110px;
+                width: auto;
+                margin: 0 auto 1.25rem auto;
             }
 
             .badge-pill {
@@ -522,32 +536,66 @@
             }
 
             .memo-grid {
-                grid-template-columns: 1fr 1fr; /* Clean 2-column layout on phones */
+                grid-template-columns: 1fr;
                 gap: 0.75rem;
-                padding: 0.85rem;
-                font-size: 0.8rem;
+                padding: 1rem;
+                font-size: 0.85rem;
+                text-align: left;
             }
 
-            /* Touch-Scrollable Table Container */
-            .table-responsive {
+            /* 2. Mobile Table Card Transformation */
+            .custom-table, 
+            .custom-table tbody, 
+            .custom-table tr, 
+            .custom-table td {
+                display: block;
                 width: 100%;
-                overflow-x: auto;
-                -webkit-overflow-scrolling: touch; /* Smooth inertia scrolling on iPhones */
-                margin: 1rem 0;
+            }
+
+            .custom-table thead {
+                display: none;
+            }
+
+            .custom-table tr {
+                margin-bottom: 1.25rem;
+                background-color: #ffffff;
                 border: 1px solid var(--udc-border);
-                border-radius: 6px;
+                border-radius: 8px;
+                box-shadow: 0 2px 6px rgba(0,0,0,0.05);
+                padding: 0.5rem 0;
             }
 
-            .custom-table {
-                min-width: 600px; /* Keeps table columns structured cleanly inside scroll box */
+            .custom-table tr.total-row {
+                background-color: #fefce8;
+                border: 2px solid var(--udc-golden);
             }
 
-            .custom-table th, .custom-table td {
-                padding: 0.65rem 0.5rem;
-                font-size: 0.825rem;
+            .custom-table td {
+                display: flex;
+                justify-content: space-between;
+                align-items: center;
+                padding: 0.75rem 1rem;
+                border-bottom: 1px solid #f1f5f9;
+                font-size: 0.875rem;
+                text-align: right;
+                white-space: normal;
             }
 
-            /* Hide hover sidebar on small touch screens */
+            .custom-table td:last-child {
+                border-bottom: none;
+            }
+
+            .custom-table td::before {
+                content: attr(data-label);
+                font-weight: 700;
+                color: var(--udc-navy);
+                text-align: left;
+                padding-right: 1rem;
+                font-size: 0.8rem;
+                text-transform: uppercase;
+                letter-spacing: 0.5px;
+            }
+
             .sidebar-nav { 
                 display: none; 
             }
@@ -556,7 +604,6 @@
                 padding: 1.25rem 1rem; 
             }
 
-            /* Mobile Stacked Testimonial Cards */
             .quotes-grid {
                 grid-template-columns: 1fr;
             }
@@ -592,11 +639,14 @@
         </ul>
     </aside>
 
-    <!-- LARGE CLEAN HEADER WITH SCROLLING LOGO -->
+    <!-- HEADER WITH DUAL DESKTOP & MOBILE LOGOS -->
     <header>
         <div class="header-container">
             <div class="header-logo-wrapper">
-                <img src="UT_DepartmentOfCorrections_Horizontal_L_WHT_POS_RGB.png" alt="Utah Department of Corrections Logo" class="main-brand-logo" />
+                <!-- Desktop Horizontal White Logo -->
+                <img src="UT_DepartmentOfCorrections_Horizontal_L_WHT_POS_RGB.png" alt="Utah Department of Corrections Logo" class="main-brand-logo desktop-logo" />
+                <!-- Mobile Vertical Emblem Logo -->
+                <img src="UT_UDC_Vertical_L_BLU_POS_RGB.png" alt="Utah Department of Corrections Emblem" class="main-brand-logo mobile-logo" />
             </div>
 
             <span class="badge-pill">Legislative FTE Building Block Request</span>
@@ -653,7 +703,7 @@
                 <div class="section-header-bar"></div>
                 <h2 class="section-title">1. Executive Purpose & Mission Alignment</h2>
             </div>
-            <p>The objective of this request is to establish a dedicated supervisory tier for civilian Control Point Operators (CPOs) to professionalize oversight, enhance facility security, and provide necessary career progression within the Utah Department of Corrections (UDC). By implementing the Control Point Operator II (CPO II) position, the Department will maximize the value, skills, and long-term retention of CPOs while mitigating legal liability through specialized oversight of civilian-staffed security posts.</p>
+            <p>The objective of this request is to establish a dedicated supervisory tier for civilian Control Point Operators (CPOs) to professionalize oversight, enhance facility security, and provide necessary career progression within the Utah Department of Corrections (UDC). By implementing the Control Point Operator II (CPO II) position, the Department will optimize human capital and mitigate legal liability through specialized oversight of civilian-staffed security posts.</p>
             <p>This initiative serves as the primary strategic mechanism to stabilize our civilian workforce, reduce turnover, and align departmental operations with modern correctional standards across the Utah State Correctional Facility (USCF) and Central Utah Correctional Facility (CUCF).</p>
         </section>
 
@@ -691,50 +741,52 @@
                 <div class="section-header-bar"></div>
                 <h2 class="section-title">3. Organizational Distribution & Reporting Structure</h2>
             </div>
-            <p>The 10 requested CPO II FTEs will be allocated across operational areas to ensure complete coverage. USCF CPO IIs report directly to their assigned area Lieutenant, while the CUCF CPO II reports directly to the CUCF Security Lieutenant.</p>
+            <p>The 10 requested CPO II FTEs will be allocated across high-complexity operational areas to ensure complete coverage. USCF CPO IIs report directly to their assigned area Lieutenant, while the CUCF CPO II reports directly to the CUCF Security Lieutenant.</p>
 
-            <table class="custom-table">
-                <thead>
-                    <tr>
-                        <th>Facility</th>
-                        <th>Allocation (FTE)</th>
-                        <th>Group / Area Assignment</th>
-                        <th>Reporting Line</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <tr>
-                        <td><strong>USCF (Salt Lake)</strong></td>
-                        <td>5 FTE</td>
-                        <td>Housing Groups (Section Controls)</td>
-                        <td>Section Lieutenants</td>
-                    </tr>
-                    <tr>
-                        <td><strong>USCF (Salt Lake)</strong></td>
-                        <td>3 FTE</td>
-                        <td>Admin Groups (Control One, Master Control, Relief)</td>
-                        <td>Admin Lieutenant</td>
-                    </tr>
-                    <tr>
-                        <td><strong>USCF (Salt Lake)</strong></td>
-                        <td>1 FTE</td>
-                        <td>Gates & Screening Group (VSP Tower, Staff Screening)</td>
-                        <td>Perimeter Lieutenant</td>
-                    </tr>
-                    <tr>
-                        <td><strong>CUCF (Gunnison)</strong></td>
-                        <td>1 FTE</td>
-                        <td>CUCF Section/Facility Control Oversight</td>
-                        <td>CUCF Security Lieutenant</td>
-                    </tr>
-                    <tr class="total-row">
-                        <td><strong>TOTAL REQUEST</strong></td>
-                        <td><strong>10 FTE</strong></td>
-                        <td><strong>Department-Wide CPO Supervision</strong></td>
-                        <td><strong>Section Command Staff</strong></td>
-                    </tr>
-                </tbody>
-            </table>
+            <div class="table-responsive">
+                <table class="custom-table">
+                    <thead>
+                        <tr>
+                            <th>Facility</th>
+                            <th>Allocation (FTE)</th>
+                            <th>Group / Area Assignment</th>
+                            <th>Reporting Line</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td data-label="Facility"><strong>USCF (Salt Lake)</strong></td>
+                            <td data-label="Allocation">5 FTE</td>
+                            <td data-label="Assignment">Housing Groups (Section Controls)</td>
+                            <td data-label="Reporting">Section Lieutenants</td>
+                        </tr>
+                        <tr>
+                            <td data-label="Facility"><strong>USCF (Salt Lake)</strong></td>
+                            <td data-label="Allocation">3 FTE</td>
+                            <td data-label="Assignment">Admin Groups (Control One, Master Control, Relief)</td>
+                            <td data-label="Reporting">Admin Lieutenant</td>
+                        </tr>
+                        <tr>
+                            <td data-label="Facility"><strong>USCF (Salt Lake)</strong></td>
+                            <td data-label="Allocation">1 FTE</td>
+                            <td data-label="Assignment">Gates & Screening Group (VSP Tower, Staff Screening)</td>
+                            <td data-label="Reporting">Perimeter Lieutenant</td>
+                        </tr>
+                        <tr>
+                            <td data-label="Facility"><strong>CUCF (Gunnison)</strong></td>
+                            <td data-label="Allocation">1 FTE</td>
+                            <td data-label="Assignment">CUCF Section/Facility Control Oversight</td>
+                            <td data-label="Reporting">CUCF Security Lieutenant</td>
+                        </tr>
+                        <tr class="total-row">
+                            <td data-label="Facility"><strong>TOTAL REQUEST</strong></td>
+                            <td data-label="Allocation"><strong>10 FTE</strong></td>
+                            <td data-label="Assignment"><strong>Department-Wide CPO Supervision</strong></td>
+                            <td data-label="Reporting"><strong>Section Command Staff</strong></td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
         </section>
 
         <!-- 4. Civilian Career Ladder Pay Scale Progression -->
@@ -745,33 +797,35 @@
             </div>
             <p>Following the established UDC Civilian Career Ladder framework (Entry, 5-Year Rate, 10-Year Rate, 15-Year Rate), establishing the CPO II tier creates a clear, predictable career progression for professional control staff:</p>
 
-            <table class="custom-table">
-                <thead>
-                    <tr>
-                        <th>Classification</th>
-                        <th>Entry Rate (&lt; 5 Yrs)</th>
-                        <th>5-Year Rate</th>
-                        <th>10-Year Rate</th>
-                        <th>15-Year Rate (Capped)</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <tr>
-                        <td><strong>Control Point Operator I (CPO I)</strong></td>
-                        <td>$22.39/hr ($46,571/yr)</td>
-                        <td>$25.10/hr ($52,208/yr)</td>
-                        <td>$28.14/hr ($58,531/yr)</td>
-                        <td>$31.67/hr ($65,873/yr)</td>
-                    </tr>
-                    <tr class="total-row">
-                        <td><strong>Proposed CPO II (Supervisory Tier)</strong></td>
-                        <td><strong>$32.50/hr ($67,600/yr)</strong></td>
-                        <td><strong>$34.29/hr ($71,323/yr)</strong></td>
-                        <td><strong>$36.18/hr ($75,254/yr)</strong></td>
-                        <td><strong>$38.17/hr ($79,393/yr)</strong></td>
-                    </tr>
-                </tbody>
-            </table>
+            <div class="table-responsive">
+                <table class="custom-table">
+                    <thead>
+                        <tr>
+                            <th>Classification</th>
+                            <th>Entry Rate (&lt; 5 Yrs)</th>
+                            <th>5-Year Rate</th>
+                            <th>10-Year Rate</th>
+                            <th>15-Year Rate (Capped)</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td data-label="Classification"><strong>Control Point Operator I (CPO I)</strong></td>
+                            <td data-label="Entry Rate">$22.39/hr ($46,571/yr)</td>
+                            <td data-label="5-Year Rate">$25.10/hr ($52,208/yr)</td>
+                            <td data-label="10-Year Rate">$28.14/hr ($58,531/yr)</td>
+                            <td data-label="15-Year Rate">$31.67/hr ($65,873/yr)</td>
+                        </tr>
+                        <tr class="total-row">
+                            <td data-label="Classification"><strong>Proposed CPO II (Supervisory Tier)</strong></td>
+                            <td data-label="Entry Rate"><strong>$32.50/hr ($67,600/yr)</strong></td>
+                            <td data-label="5-Year Rate"><strong>$34.29/hr ($71,323/yr)</strong></td>
+                            <td data-label="10-Year Rate"><strong>$36.18/hr ($75,254/yr)</strong></td>
+                            <td data-label="15-Year Rate"><strong>$38.17/hr ($79,393/yr)</strong></td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
             <p style="font-size: 0.88rem; color: #64748b;"><em>Contextual Benchmarks: Certified Correctional Officer starting wage is $31.52/hr ($65,561/yr) and Sergeant starting wage is $39.27/hr ($81,681/yr).</em></p>
         </section>
 
@@ -821,7 +875,8 @@
                 </div>
             </div>
         </section>
-        <!-- 6. Field Testimonies with Single/Dual Photo Avatars -->
+
+        <!-- 6. Field Testimonies -->
         <section id="feedback">
             <div class="section-header">
                 <div class="section-header-bar"></div>
@@ -831,7 +886,7 @@
 
             <div class="quotes-grid">
                 
-                <!-- Testimony 1: Dual PNG Photos (Toponce & Toimoana) -->
+                <!-- Testimony 1: Dual Photo (Toponce & Toimoana) -->
                 <div class="quote-card">
                     <div class="quote-body">"CPO II supervisors walking housing unit floors with officers and sergeants will bridge the communication gap between housing operations and locked control pods."</div>
                     <div class="author-box">
@@ -846,7 +901,7 @@
                     </div>
                 </div>
 
-                <!-- Testimony 2: Single PNG Photo (Raven Jones) -->
+                <!-- Testimony 2: Single Photo (Raven Jones) -->
                 <div class="quote-card">
                     <div class="quote-body">"CPO II supervisors should operate as mobile 'Rovers' rather than staying locked in a single pod, ensuring operational consistency across section controls and providing active support."</div>
                     <div class="author-box">
@@ -860,7 +915,7 @@
                     </div>
                 </div>
 
-                <!-- Testimony 3: Dual PNG Photos (Kent & Zimmerman) -->
+                <!-- Testimony 3: Dual Photo (Kent & Zimmerman) -->
                 <div class="quote-card">
                     <div class="quote-body">"Continuous log audits and dedicated oversight of administrative software like Vantage and BlueTeam will ensure higher legal compliance and proper shift documentation."</div>
                     <div class="author-box">
@@ -875,7 +930,7 @@
                     </div>
                 </div>
 
-                <!-- Testimony 4: Single PNG Photo (Dave Damjonovich) -->
+                <!-- Testimony 4: Single Photo (Dave Damjonovich) -->
                 <div class="quote-card">
                     <div class="quote-body">"CPOs currently lack direct representation. A CPO II will act as a dedicated ambassador for control staff and keep expectations standardized across all posts."</div>
                     <div class="author-box">
@@ -889,7 +944,7 @@
                     </div>
                 </div>
 
-                <!-- Testimony 5: Single PNG Photo (Loren Mockbee) -->
+                <!-- Testimony 5: Single Photo (Loren Mockbee) -->
                 <div class="quote-card">
                     <div class="quote-body">"An open-book written test and practical scenario evaluations will keep politics out of promotions and select leaders based purely on competency."</div>
                     <div class="author-box">
@@ -903,7 +958,7 @@
                     </div>
                 </div>
 
-                <!-- Testimony 6: Single PNG Photo (Michael Kimber) -->
+                <!-- Testimony 6: Single Photo (Michael Kimber) -->
                 <div class="quote-card">
                     <div class="quote-body">"Accessible leadership visiting control pods and managing a dedicated CPO email distribution network will ensure timely communication of critical facility updates."</div>
                     <div class="author-box">
@@ -917,7 +972,7 @@
                     </div>
                 </div>
 
-                <!-- Testimony 7: Dual PNG Photos (Truchard & Barnett) -->
+                <!-- Testimony 7: Dual Photo (Truchard & Barnett) -->
                 <div class="quote-card">
                     <div class="quote-body">"Auditing posts to assemble standardized Post Binders and conducting mobile rover checks will directly improve operational consistency across shifts."</div>
                     <div class="author-box">
@@ -934,7 +989,6 @@
 
             </div>
         </section>
-```
 
         <!-- 7. Appropriation Request -->
         <section id="budget">
@@ -944,32 +998,34 @@
             </div>
             <p>The proposed starting wage for a CPO II is structured at <strong>$32.50/hr</strong> ($67,600 annually), placing the supervisory tier appropriately above a capped-out CPO I ($31.67/hr) while aligning cleanly with state pay tables.</p>
 
-            <table class="custom-table">
-                <thead>
-                    <tr>
-                        <th>Expenditure Category</th>
-                        <th>Cost Per FTE (Annual)</th>
-                        <th>Total Ongoing Request (10 FTEs)</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <tr>
-                        <td><strong>Entry CPO II Base Salary</strong> ($32.50/hr)</td>
-                        <td>$67,600</td>
-                        <td>$676,000</td>
-                    </tr>
-                    <tr>
-                        <td><strong>State Benefits, Uniforms & Equipment Package</strong></td>
-                        <td>$35,800</td>
-                        <td>$358,000</td>
-                    </tr>
-                    <tr class="total-row">
-                        <td><strong>TOTAL ONGOING APPROPRIATION REQUEST</strong></td>
-                        <td><strong>$103,400</strong></td>
-                        <td><strong>$1,034,000</strong></td>
-                    </tr>
-                </tbody>
-            </table>
+            <div class="table-responsive">
+                <table class="custom-table">
+                    <thead>
+                        <tr>
+                            <th>Expenditure Category</th>
+                            <th>Cost Per FTE (Annual)</th>
+                            <th>Total Ongoing Request (10 FTEs)</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td data-label="Expenditure Category"><strong>Entry CPO II Base Salary</strong> ($32.50/hr)</td>
+                            <td data-label="Cost Per FTE">$67,600</td>
+                            <td data-label="Total Request">$676,000</td>
+                        </tr>
+                        <tr>
+                            <td data-label="Expenditure Category"><strong>State Benefits, Uniforms & Equipment Package</strong></td>
+                            <td data-label="Cost Per FTE">$35,800</td>
+                            <td data-label="Total Request">$358,000</td>
+                        </tr>
+                        <tr class="total-row">
+                            <td data-label="Expenditure Category"><strong>TOTAL ONGOING APPROPRIATION REQUEST</strong></td>
+                            <td data-label="Cost Per FTE"><strong>$103,400</strong></td>
+                            <td data-label="Total Request"><strong>$1,034,000</strong></td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
         </section>
 
     </div>
