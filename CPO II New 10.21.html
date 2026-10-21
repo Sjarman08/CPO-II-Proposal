@@ -1,0 +1,909 @@
+```html
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CPO II Proposal | Utah Department of Corrections</title>
+    <!-- Google Fonts for Brand Library typography -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Source+Sans+3:ital,wght@0,300;0,400;0,600;0,700;0,800;1,400&family=Merriweather:wght@400;700&display=swap" rel="stylesheet">
+    <style>
+        /* UDCconnect Brand Palette Guidelines */
+        :root {
+            --udc-navy: #071D49;       /* Department Primary Navy */
+            --udc-blue: #093692;       /* State Blue */
+            --udc-mist: #C1CFE7;       /* Department Accent Mist */
+            --udc-sand: #E9DCC8;       /* Background Accent Sand */
+            --udc-golden: #FFB81D;     /* Accent Golden Gold */
+            --udc-dark: #0f172a;       /* Dark Neutral Text */
+            --udc-gray-bg: #f8fafc;    /* Card & Section Light Gray */
+            --udc-border: #cbd5e1;     /* High Contrast Border */
+            --udc-white: #ffffff;
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            font-family: 'Source Sans 3', -apple-system, BlinkMacSystemFont, sans-serif;
+            background-color: var(--udc-gray-bg);
+            color: var(--udc-dark);
+            line-height: 1.6;
+            -webkit-font-smoothing: antialiased;
+        }
+
+        /* Top Agency Bar */
+        .udc-top-bar {
+            background-color: #030a1c;
+            color: var(--udc-mist);
+            padding: 0.5rem 2rem;
+            font-size: 0.85rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+            font-weight: 600;
+            letter-spacing: 0.5px;
+        }
+
+        /* COLLAPSIBLE LEFT HOVER NAVIGATION SIDEBAR */
+        .sidebar-nav {
+            position: fixed;
+            top: 0;
+            left: 0;
+            height: 100vh;
+            width: 270px;
+            background-color: var(--udc-navy);
+            box-shadow: 4px 0 20px rgba(0,0,0,0.35);
+            z-index: 2000;
+            transform: translateX(-255px); /* Keeps indicator tab visible on left edge */
+            transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            border-right: 4px solid var(--udc-golden);
+            display: flex;
+            flex-direction: column;
+            padding: 2rem 1.25rem;
+        }
+
+        /* Slide out fully on hover */
+        .sidebar-nav:hover {
+            transform: translateX(0);
+        }
+
+        /* Visible edge tab indicator */
+        .sidebar-tab {
+            position: absolute;
+            right: -38px;
+            top: 40%;
+            background: var(--udc-navy);
+            color: var(--udc-golden);
+            padding: 0.9rem 0.4rem;
+            border-radius: 0 8px 8px 0;
+            border: 2px solid var(--udc-golden);
+            border-left: none;
+            writing-mode: vertical-rl;
+            text-orientation: mixed;
+            font-size: 0.75rem;
+            font-weight: 800;
+            letter-spacing: 1.5px;
+            text-transform: uppercase;
+            box-shadow: 4px 0 10px rgba(0,0,0,0.2);
+            cursor: pointer;
+        }
+
+        .sidebar-title {
+            color: var(--udc-white);
+            font-family: 'Merriweather', serif;
+            font-size: 1.1rem;
+            margin-bottom: 0.25rem;
+            font-weight: 700;
+        }
+
+        .sidebar-subtitle {
+            color: var(--udc-mist);
+            font-size: 0.75rem;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            margin-bottom: 2rem;
+            padding-bottom: 1rem;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.15);
+        }
+
+        .sidebar-links {
+            list-style: none;
+            display: flex;
+            flex-direction: column;
+            gap: 0.5rem;
+        }
+
+        .sidebar-links a {
+            color: var(--udc-mist);
+            text-decoration: none;
+            font-size: 0.95rem;
+            font-weight: 600;
+            padding: 0.75rem 1rem;
+            border-radius: 6px;
+            display: block;
+            transition: all 0.2s ease;
+        }
+
+        .sidebar-links a:hover {
+            color: var(--udc-navy);
+            background-color: var(--udc-golden);
+            font-weight: 700;
+        }
+
+        /* LARGE CLEAN TOP HEADER (Scrolls naturally) */
+        header {
+            background: linear-gradient(135deg, var(--udc-navy) 0%, #030c22 100%);
+            color: var(--udc-white);
+            padding: 3.5rem 2rem;
+            border-bottom: 5px solid var(--udc-golden);
+        }
+
+        .header-container {
+            max-width: 1100px;
+            margin: 0 auto;
+        }
+
+        .header-logo-wrapper {
+            margin-bottom: 2rem;
+        }
+
+        /* Prominent Header Logo */
+        .main-brand-logo {
+            height: 85px;
+            width: auto;
+            object-fit: contain;
+            filter: drop-shadow(0 4px 10px rgba(0,0,0,0.4));
+        }
+
+        .badge-pill {
+            background-color: rgba(255, 184, 29, 0.15);
+            color: var(--udc-golden);
+            padding: 0.35rem 1rem;
+            border-radius: 50px;
+            font-size: 0.85rem;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            display: inline-block;
+            margin-bottom: 1.25rem;
+            border: 1px solid var(--udc-golden);
+        }
+
+        .header-title {
+            font-family: 'Merriweather', serif;
+            font-size: 2.5rem;
+            font-weight: 700;
+            margin-bottom: 1rem;
+            line-height: 1.25;
+            color: var(--udc-white);
+        }
+
+        .header-subtitle {
+            font-size: 1.2rem;
+            color: var(--udc-mist);
+            max-width: 850px;
+            margin-bottom: 2rem;
+            font-weight: 400;
+        }
+
+        .memo-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 1.5rem;
+            background: rgba(255, 255, 255, 0.06);
+            padding: 1.25rem;
+            border-radius: 8px;
+            border-left: 4px solid var(--udc-golden);
+            font-size: 0.9rem;
+            color: var(--udc-mist);
+        }
+
+        .memo-item strong {
+            color: var(--udc-white);
+            display: block;
+            margin-bottom: 0.2rem;
+        }
+
+        /* Container Layout */
+        .container {
+            max-width: 1100px;
+            margin: 0 auto;
+            padding: 3rem 1.5rem;
+        }
+
+        /* Metrics Bar */
+        .metrics-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+            gap: 1.5rem;
+            margin-bottom: 3rem;
+        }
+
+        .metric-card {
+            background: var(--udc-white);
+            padding: 1.5rem;
+            border-radius: 8px;
+            border: 1px solid var(--udc-border);
+            border-top: 4px solid var(--udc-navy);
+            box-shadow: 0 2px 8px rgba(0,0,0,0.04);
+            text-align: center;
+        }
+
+        .metric-card.gold {
+            border-top-color: var(--udc-golden);
+        }
+
+        .metric-val {
+            font-family: 'Merriweather', serif;
+            font-size: 2.2rem;
+            font-weight: 700;
+            color: var(--udc-navy);
+            margin-bottom: 0.25rem;
+        }
+
+        .metric-label {
+            font-size: 0.85rem;
+            font-weight: 700;
+            color: #64748b;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+
+        /* Content Sections */
+        section {
+            background: var(--udc-white);
+            border-radius: 8px;
+            padding: 2.5rem;
+            margin-bottom: 2.5rem;
+            border: 1px solid var(--udc-border);
+            box-shadow: 0 2px 6px rgba(0,0,0,0.03);
+        }
+
+        .section-header {
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+            margin-bottom: 1.5rem;
+            padding-bottom: 0.75rem;
+            border-bottom: 2px solid var(--udc-sand);
+        }
+
+        .section-header-bar {
+            width: 6px;
+            height: 2rem;
+            background-color: var(--udc-navy);
+            border-radius: 3px;
+        }
+
+        .section-title {
+            font-family: 'Merriweather', serif;
+            font-size: 1.5rem;
+            color: var(--udc-navy);
+            font-weight: 700;
+        }
+
+        p {
+            margin-bottom: 1.2rem;
+            font-size: 1.025rem;
+            color: #334155;
+        }
+
+        /* Tables */
+        .custom-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 1.5rem 0;
+            font-size: 0.95rem;
+        }
+
+        .custom-table th {
+            background-color: var(--udc-navy);
+            color: var(--udc-white);
+            text-align: left;
+            padding: 0.9rem 1rem;
+            font-weight: 700;
+            letter-spacing: 0.5px;
+        }
+
+        .custom-table td {
+            padding: 0.9rem 1rem;
+            border-bottom: 1px solid var(--udc-border);
+        }
+
+        .custom-table tr:nth-child(even) {
+            background-color: #f1f5f9;
+        }
+
+        .custom-table tr.total-row {
+            background-color: var(--udc-sand);
+            font-weight: 700;
+            color: var(--udc-navy);
+        }
+
+        /* Pipeline Steps (6-Point Process) */
+        .pipeline-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+            gap: 1.5rem;
+            margin-top: 1.5rem;
+        }
+
+        .pipeline-card {
+            background-color: var(--udc-gray-bg);
+            border: 1px solid var(--udc-border);
+            border-left: 5px solid var(--udc-blue);
+            padding: 1.5rem;
+            border-radius: 0 8px 8px 0;
+        }
+
+        .pipeline-step {
+            font-size: 0.8rem;
+            font-weight: 800;
+            color: var(--udc-blue);
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            margin-bottom: 0.3rem;
+        }
+
+        .pipeline-title {
+            font-family: 'Merriweather', serif;
+            font-size: 1.1rem;
+            font-weight: 700;
+            color: var(--udc-navy);
+            margin-bottom: 0.5rem;
+        }
+
+        .pipeline-desc {
+            font-size: 0.925rem;
+            color: #475569;
+            margin-bottom: 0;
+        }
+
+        /* TESTIMONIAL CARDS WITH PROMINENT SINGLE/DUAL PHOTO AVATARS */
+        .quotes-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(340px, 1fr));
+            gap: 1.75rem;
+            margin-top: 1.5rem;
+        }
+
+        .quote-card {
+            background-color: #faf8f5;
+            border: 1px solid var(--udc-sand);
+            border-left: 5px solid var(--udc-golden);
+            padding: 1.75rem;
+            border-radius: 0 8px 8px 0;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.03);
+        }
+
+        .quote-body {
+            font-style: italic;
+            color: #334155;
+            font-size: 0.975rem;
+            margin-bottom: 1.5rem;
+            line-height: 1.55;
+        }
+
+        .author-box {
+            display: flex;
+            flex-direction: column;
+            gap: 0.85rem;
+            padding-top: 1rem;
+            border-top: 1px solid var(--udc-sand);
+        }
+
+        /* Flex container for single or dual photo avatars */
+        .author-avatars-group {
+            display: flex;
+            gap: 0.85rem;
+            align-items: center;
+        }
+
+        /* Large, sharp photo avatar frame */
+        .cpo-avatar {
+            width: 85px;
+            height: 85px;
+            border-radius: 8px; /* Modern rounded badge frame */
+            object-fit: cover;
+            border: 3px solid var(--udc-golden);
+            box-shadow: 0 4px 8px rgba(0,0,0,0.12);
+            background-color: var(--udc-mist);
+            flex-shrink: 0;
+        }
+
+        .author-details {
+            display: flex;
+            flex-direction: column;
+        }
+
+        .author-name {
+            font-weight: 700;
+            color: var(--udc-navy);
+            font-size: 0.95rem;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            margin-bottom: 0.15rem;
+        }
+
+        .author-title {
+            font-size: 0.8rem;
+            color: #64748b;
+            font-weight: 600;
+        }
+
+        /* Duty Icons Grid */
+        .duties-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+            gap: 1.25rem;
+            margin-top: 1.5rem;
+        }
+
+        .duty-box {
+            background-color: var(--udc-gray-bg);
+            border: 1px solid var(--udc-border);
+            padding: 1.25rem;
+            border-radius: 6px;
+        }
+
+        .duty-title {
+            font-weight: 700;
+            color: var(--udc-navy);
+            margin-bottom: 0.5rem;
+            font-size: 1rem;
+        }
+
+        .duty-desc {
+            font-size: 0.875rem;
+            color: #475569;
+            margin-bottom: 0;
+        }
+
+        /* Footer */
+        footer {
+            background-color: var(--udc-navy);
+            color: var(--udc-mist);
+            text-align: center;
+            padding: 2.5rem 1.5rem;
+            border-top: 4px solid var(--udc-golden);
+            font-size: 0.9rem;
+        }
+
+        footer p {
+            color: var(--udc-mist);
+            margin-bottom: 0.5rem;
+        }
+
+        @media (max-width: 768px) {
+            .header-title { font-size: 1.8rem; }
+            .sidebar-nav { display: none; }
+            section { padding: 1.5rem; }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Top Agency Bar -->
+    <div class="udc-top-bar">
+        <span>UTAH DEPARTMENT OF CORRECTIONS</span>
+        <span>DIVISION OF PRISON OPERATIONS</span>
+    </div>
+
+    <!-- COLLAPSIBLE LEFT-HAND HOVER NAVIGATION SIDEBAR -->
+    <aside class="sidebar-nav">
+        <div class="sidebar-tab">NAVIGATION ❯</div>
+        <div class="sidebar-title">Proposal Menu</div>
+        <div class="sidebar-subtitle">UDC CPO II Request</div>
+        <ul class="sidebar-links">
+            <li><a href="#purpose">1. Executive Purpose</a></li>
+            <li><a href="#rover">2. Rover Model</a></li>
+            <li><a href="#allocation">3. FTE Distribution</a></li>
+            <li><a href="#payscale">4. Career Pay Scale</a></li>
+            <li><a href="#promotional">5. Promotional Pipeline</a></li>
+            <li><a href="#feedback">6. Field Feedback</a></li>
+            <li><a href="#budget">7. Appropriation</a></li>
+        </ul>
+    </aside>
+
+    <!-- LARGE CLEAN HEADER WITH SCROLLING LOGO -->
+    <header>
+        <div class="header-container">
+            <div class="header-logo-wrapper">
+                <img src="UT_DepartmentOfCorrections_Horizontal_L_WHT_POS_RGB.png" alt="Utah Department of Corrections Logo" class="main-brand-logo" />
+            </div>
+
+            <span class="badge-pill">Legislative FTE Building Block Request</span>
+            <h1 class="header-title">Control Point Operator II (CPO II) Supervisory Tier</h1>
+            <p class="header-subtitle">Establishing Specialized Oversight, Professional Career Advancement, and Operational Stability Across UDC Control Infrastructure</p>
+
+            <div class="memo-grid">
+                <div class="memo-item">
+                    <strong>MEMORANDUM TO:</strong>
+                    Warden Sharon D'Amico (UDC)
+                </div>
+                <div class="memo-item">
+                    <strong>THROUGH:</strong>
+                    Deputy Warden Cory Rich
+                </div>
+                <div class="memo-item">
+                    <strong>SUBMITTED BY:</strong>
+                    Lieutenant Seth Jarman
+                </div>
+                <div class="memo-item">
+                    <strong>DATE OF REQUEST:</strong>
+                    September 11, 2026
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <!-- Main Content -->
+    <div class="container">
+
+        <!-- Metrics Overview -->
+        <div class="metrics-grid">
+            <div class="metric-card gold">
+                <div class="metric-val">10 FTE</div>
+                <div class="metric-label">CPO II Supervisory FTEs</div>
+            </div>
+            <div class="metric-card">
+                <div class="metric-val">90 CPOs</div>
+                <div class="metric-label">Professional Staff Supported</div>
+            </div>
+            <div class="metric-card">
+                <div class="metric-val">9:1 Ratio</div>
+                <div class="metric-label">Target Span of Control</div>
+            </div>
+            <div class="metric-card">
+                <div class="metric-val">$32.50/hr</div>
+                <div class="metric-label">Proposed Starting Rate</div>
+            </div>
+        </div>
+
+        <!-- 1. Executive Purpose -->
+        <section id="purpose">
+            <div class="section-header">
+                <div class="section-header-bar"></div>
+                <h2 class="section-title">1. Executive Purpose & Mission Alignment</h2>
+            </div>
+            <p>The objective of this request is to establish a dedicated supervisory tier for civilian Control Point Operators (CPOs) to professionalize oversight, enhance facility security, and provide necessary career progression within the Utah Department of Corrections (UDC). By implementing the Control Point Operator II (CPO II) position, the Department will maximize the value, skills, and long-term retention of CPOs while mitigating legal liability through specialized oversight of civilian-staffed security posts.</p>
+            <p>This initiative serves as the primary strategic mechanism to stabilize our civilian workforce, reduce turnover, and align departmental operations with modern correctional standards across the Utah State Correctional Facility (USCF) and Central Utah Correctional Facility (CUCF).</p>
+        </section>
+
+        <!-- 2. Rover Model & Duties -->
+        <section id="rover">
+            <div class="section-header">
+                <div class="section-header-bar"></div>
+                <h2 class="section-title">2. CPO II "Rover" Supervisory Model</h2>
+            </div>
+            <p>The CPO II will operate under a mobile <strong>"Rover"</strong> supervision model, providing active technical, administrative, and psychological support across assigned control posts without remaining static at a single station.</p>
+
+            <div class="duties-grid">
+                <div class="duty-box">
+                    <div class="duty-title">High-Level Operations</div>
+                    <div class="duty-desc">Initiating facility counts, contacting county jails to coordinate transfers, logging discrepancies, and tracking UMC transports.</div>
+                </div>
+                <div class="duty-box">
+                    <div class="duty-title">Post Standardization</div>
+                    <div class="duty-desc">Auditing posts to assemble standardized Post Binders (IMS emergency protocols & unusual occurrences).</div>
+                </div>
+                <div class="duty-box">
+                    <div class="duty-title">Administrative Triage</div>
+                    <div class="duty-desc">Managing inmate complaints, reviewing daily logs, approving timesheets, and overseeing leave coordination.</div>
+                </div>
+                <div class="duty-box">
+                    <div class="duty-title">Technical Systems</div>
+                    <div class="duty-desc">Expert O-Track lookup assistance for housing officers and systems documentation via Vantage and BlueTeam.</div>
+                </div>
+            </div>
+        </section>
+
+        <!-- 3. Organizational Allocation -->
+        <section id="allocation">
+            <div class="section-header">
+                <div class="section-header-bar"></div>
+                <h2 class="section-title">3. Organizational Distribution & Reporting Structure</h2>
+            </div>
+            <p>The 10 requested CPO II FTEs will be allocated across operational areas to ensure complete coverage. USCF CPO IIs report directly to their assigned area Lieutenant, while the CUCF CPO II reports directly to the CUCF Security Lieutenant.</p>
+
+            <table class="custom-table">
+                <thead>
+                    <tr>
+                        <th>Facility</th>
+                        <th>Allocation (FTE)</th>
+                        <th>Group / Area Assignment</th>
+                        <th>Reporting Line</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td><strong>USCF (Salt Lake)</strong></td>
+                        <td>5 FTE</td>
+                        <td>Housing Groups (Section Controls)</td>
+                        <td>Section Lieutenants</td>
+                    </tr>
+                    <tr>
+                        <td><strong>USCF (Salt Lake)</strong></td>
+                        <td>3 FTE</td>
+                        <td>Admin Groups (Control One, Master Control, Relief)</td>
+                        <td>Admin Lieutenant</td>
+                    </tr>
+                    <tr>
+                        <td><strong>USCF (Salt Lake)</strong></td>
+                        <td>1 FTE</td>
+                        <td>Gates & Screening Group (VSP Tower, Staff Screening)</td>
+                        <td>Perimeter Lieutenant</td>
+                    </tr>
+                    <tr>
+                        <td><strong>CUCF (Gunnison)</strong></td>
+                        <td>1 FTE</td>
+                        <td>CUCF Section/Facility Control Oversight</td>
+                        <td>CUCF Security Lieutenant</td>
+                    </tr>
+                    <tr class="total-row">
+                        <td><strong>TOTAL REQUEST</strong></td>
+                        <td><strong>10 FTE</strong></td>
+                        <td><strong>Department-Wide CPO Supervision</strong></td>
+                        <td><strong>Section Command Staff</strong></td>
+                    </tr>
+                </tbody>
+            </table>
+        </section>
+
+        <!-- 4. Civilian Career Ladder Pay Scale Progression -->
+        <section id="payscale">
+            <div class="section-header">
+                <div class="section-header-bar"></div>
+                <h2 class="section-title">4. UDC Civilian Career Ladder Pay Scale Progression</h2>
+            </div>
+            <p>Following the established UDC Civilian Career Ladder framework (Entry, 5-Year Rate, 10-Year Rate, 15-Year Rate), establishing the CPO II tier creates a clear, predictable career progression for professional control staff:</p>
+
+            <table class="custom-table">
+                <thead>
+                    <tr>
+                        <th>Classification</th>
+                        <th>Entry Rate (&lt; 5 Yrs)</th>
+                        <th>5-Year Rate</th>
+                        <th>10-Year Rate</th>
+                        <th>15-Year Rate (Capped)</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td><strong>Control Point Operator I (CPO I)</strong></td>
+                        <td>$22.39/hr ($46,571/yr)</td>
+                        <td>$25.10/hr ($52,208/yr)</td>
+                        <td>$28.14/hr ($58,531/yr)</td>
+                        <td>$31.67/hr ($65,873/yr)</td>
+                    </tr>
+                    <tr class="total-row">
+                        <td><strong>Proposed CPO II (Supervisory Tier)</strong></td>
+                        <td><strong>$32.50/hr ($67,600/yr)</strong></td>
+                        <td><strong>$34.29/hr ($71,323/yr)</strong></td>
+                        <td><strong>$36.18/hr ($75,254/yr)</strong></td>
+                        <td><strong>$38.17/hr ($79,393/yr)</strong></td>
+                    </tr>
+                </tbody>
+            </table>
+            <p style="font-size: 0.88rem; color: #64748b;"><em>Contextual Benchmarks: Certified Correctional Officer starting wage is $31.52/hr ($65,561/yr) and Sergeant starting wage is $39.27/hr ($81,681/yr).</em></p>
+        </section>
+
+        <!-- 5. Merit Promotional Pipeline -->
+        <section id="promotional">
+            <div class="section-header">
+                <div class="section-header-bar"></div>
+                <h2 class="section-title">5. Proposed 6-Stage Merit Promotional Framework</h2>
+            </div>
+            <p>To eliminate political favoritism and ensure only the most qualified, competent leaders advance into supervisory roles, the promotional process will follow a structured 6-point evaluation framework aligned with UDC Policy <strong>AF19 (Staff Promotional Process)</strong>:</p>
+
+            <div class="pipeline-grid">
+                <div class="pipeline-card">
+                    <div class="pipeline-step">Stage 1</div>
+                    <div class="pipeline-title">Application & Point-Based Resume</div>
+                    <div class="pipeline-desc">Formal application and weighted scoring of professional background, experience, and qualifications.</div>
+                </div>
+
+                <div class="pipeline-card">
+                    <div class="pipeline-step">Stage 2</div>
+                    <div class="pipeline-title">Peer & Supervisor Reviews</div>
+                    <div class="pipeline-desc">Feedback from housing officers, sergeants, and lieutenants evaluating character and rapport.</div>
+                </div>
+
+                <div class="pipeline-card">
+                    <div class="pipeline-step">Stage 3</div>
+                    <div class="pipeline-title">Open-Book Written Examination</div>
+                    <div class="pipeline-desc">Evaluates policy navigation and manual application across UDC manuals, udc.utah.gov, UDCCONNECT and post orders. Open-book measures competency, not memorization.</div>
+                </div>
+
+                <div class="pipeline-card">
+                    <div class="pipeline-step">Stage 4</div>
+                    <div class="pipeline-title">Reliability Audit</div>
+                    <div class="pipeline-desc">Formal administrative review of attendance, punctuality, leave history, and disciplinary status per AF19 guidelines.</div>
+                </div>
+
+                <div class="pipeline-card">
+                    <div class="pipeline-step">Stage 5</div>
+                    <div class="pipeline-title">Practical Scenario Assessment</div>
+                    <div class="pipeline-desc">Evaluates real-time decision making during simulated control room emergencies and HMI/IMS activations.</div>
+                </div>
+
+                <div class="pipeline-card">
+                    <div class="pipeline-step">Stage 6</div>
+                    <div class="pipeline-title">Structured Panel Interview</div>
+                    <div class="pipeline-desc">Formal interview board conducted in full compliance with UDC Policy AF19 guidelines.</div>
+                </div>
+            </div>
+        </section>
+        <!-- 6. Field Testimonies with Single/Dual Photo Avatars -->
+        <section id="feedback">
+            <div class="section-header">
+                <div class="section-header-bar"></div>
+                <h2 class="section-title">6. Frontline CPO Insights & Field Testimonies</h2>
+            </div>
+            <p>Direct consultation with tenured and well-respected Control Point Operators reinforces the critical operational necessity of establishing this supervisor role:</p>
+
+            <div class="quotes-grid">
+                
+                <!-- Testimony 1: Dual PNG Photos (Toponce & Toimoana) -->
+                <div class="quote-card">
+                    <div class="quote-body">"CPO II supervisors walking housing unit floors with officers and sergeants will bridge the communication gap between housing operations and locked control pods."</div>
+                    <div class="author-box">
+                        <div class="author-avatars-group">
+                            <img src="toponce.png" alt="Jonathan Toponce" class="cpo-avatar" />
+                            <img src="lama.png" alt="Tuilalolama Toimoana" class="cpo-avatar" />
+                        </div>
+                        <div class="author-details">
+                            <span class="author-name">Jonathan Toponce & Tuilalolama "Lama" Toimoana</span>
+                            <span class="author-title">Tenured Control Point Operators</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Testimony 2: Single PNG Photo (Raven Jones) -->
+                <div class="quote-card">
+                    <div class="quote-body">"CPO II supervisors should operate as mobile 'Rovers' rather than staying locked in a single pod, ensuring operational consistency across section controls and providing active support."</div>
+                    <div class="author-box">
+                        <div class="author-avatars-group">
+                            <img src="raven_jones.png" alt="Raven Jones" class="cpo-avatar" />
+                        </div>
+                        <div class="author-details">
+                            <span class="author-name">Raven Jones</span>
+                            <span class="author-title">Control Point Operator</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Testimony 3: Dual PNG Photos (Kent & Zimmerman) -->
+                <div class="quote-card">
+                    <div class="quote-body">"Continuous log audits and dedicated oversight of administrative software like Vantage and BlueTeam will ensure higher legal compliance and proper shift documentation."</div>
+                    <div class="author-box">
+                        <div class="author-avatars-group">
+                            <img src="kent.png" alt="Adam Kent" class="cpo-avatar" />
+                            <img src="zimmerman.png" alt="Brady Zimmerman" class="cpo-avatar" />
+                        </div>
+                        <div class="author-details">
+                            <span class="author-name">Adam Kent & Brady Zimmerman</span>
+                            <span class="author-title">Control Point Operators</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Testimony 4: Single PNG Photo (Dave Damjonovich) -->
+                <div class="quote-card">
+                    <div class="quote-body">"CPOs currently lack direct representation. A CPO II will act as a dedicated ambassador for control staff and keep expectations standardized across all posts."</div>
+                    <div class="author-box">
+                        <div class="author-avatars-group">
+                            <img src="damjonovich.png" alt="Dave Damjonovich" class="cpo-avatar" />
+                        </div>
+                        <div class="author-details">
+                            <span class="author-name">Dave Damjonovich</span>
+                            <span class="author-title">Tenured Control Point Operator</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Testimony 5: Single PNG Photo (Loren Mockbee) -->
+                <div class="quote-card">
+                    <div class="quote-body">"An open-book written test and practical scenario evaluations will keep politics out of promotions and select leaders based purely on competency."</div>
+                    <div class="author-box">
+                        <div class="author-avatars-group">
+                            <img src="mockbee.png" alt="Loren Mockbee" class="cpo-avatar" />
+                        </div>
+                        <div class="author-details">
+                            <span class="author-name">Loren Mockbee</span>
+                            <span class="author-title">Control Point Operator</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Testimony 6: Single PNG Photo (Michael Kimber) -->
+                <div class="quote-card">
+                    <div class="quote-body">"Accessible leadership visiting control pods and managing a dedicated CPO email distribution network will ensure timely communication of critical facility updates."</div>
+                    <div class="author-box">
+                        <div class="author-avatars-group">
+                            <img src="kimber.png" alt="Michael Kimber" class="cpo-avatar" />
+                        </div>
+                        <div class="author-details">
+                            <span class="author-name">Michael Kimber</span>
+                            <span class="author-title">Control Point Operator</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Testimony 7: Dual PNG Photos (Truchard & Barnett) -->
+                <div class="quote-card">
+                    <div class="quote-body">"Auditing posts to assemble standardized Post Binders and conducting mobile rover checks will directly improve operational consistency across shifts."</div>
+                    <div class="author-box">
+                        <div class="author-avatars-group">
+                            <img src="truchard.png" alt="Micaela Truchard" class="cpo-avatar" />
+                            <img src="barnett.png" alt="Alexis Barnett" class="cpo-avatar" />
+                        </div>
+                        <div class="author-details">
+                            <span class="author-name">Micaela Truchard & Alexis Barnett</span>
+                            <span class="author-title">Control Point Operators</span>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </section>
+```
+
+        <!-- 7. Appropriation Request -->
+        <section id="budget">
+            <div class="section-header">
+                <div class="section-header-bar"></div>
+                <h2 class="section-title">7. Financial Appropriation Request</h2>
+            </div>
+            <p>The proposed starting wage for a CPO II is structured at <strong>$32.50/hr</strong> ($67,600 annually), placing the supervisory tier appropriately above a capped-out CPO I ($31.67/hr) while aligning cleanly with state pay tables.</p>
+
+            <table class="custom-table">
+                <thead>
+                    <tr>
+                        <th>Expenditure Category</th>
+                        <th>Cost Per FTE (Annual)</th>
+                        <th>Total Ongoing Request (10 FTEs)</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td><strong>Entry CPO II Base Salary</strong> ($32.50/hr)</td>
+                        <td>$67,600</td>
+                        <td>$676,000</td>
+                    </tr>
+                    <tr>
+                        <td><strong>State Benefits, Uniforms & Equipment Package</strong></td>
+                        <td>$35,800</td>
+                        <td>$358,000</td>
+                    </tr>
+                    <tr class="total-row">
+                        <td><strong>TOTAL ONGOING APPROPRIATION REQUEST</strong></td>
+                        <td><strong>$103,400</strong></td>
+                        <td><strong>$1,034,000</strong></td>
+                    </tr>
+                </tbody>
+            </table>
+        </section>
+
+    </div>
+
+    <!-- Footer -->
+    <footer>
+        <p><strong>Utah Department of Corrections</strong> — Division of Prison Operations</p>
+        <p>Legislative FTE Building Block Request | Control Point Operator II (CPO II)</p>
+        <p style="font-size: 0.8rem; color: #94a3b8; margin-top: 0.5rem;">Prepared September 2026 | Compliant with UDC Policy AF19 & UDCconnect Brand Guidelines</p>
+    </footer>
+
+</body>
+</html>
+```
